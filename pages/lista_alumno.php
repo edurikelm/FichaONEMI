@@ -31,6 +31,7 @@ include('includes/interfaz.php');
                                 <th scope="col">Nombres</th>
                                 <th scope="col">Apellidos</th>
                                 <th scope="col">Curso</th>
+                                <th scope="col">Situación</th>
                                 <th scope="col">Fichas</th>
                                 <th scope="col">Opciones</th>
 
@@ -39,14 +40,11 @@ include('includes/interfaz.php');
 
                         <tbody>
                             <?php 
-                                    $sql = "SELECT * FROM alumnos";
+                                    $sql = "SELECT * FROM alumnos order by id DESC";
                                     $resultado = mysqli_query($enlace, $sql);
                                     while ($dado = mysqli_fetch_array($resultado)):
 
-                                        // $nombre = $dado['nombres'];
-                                        // $codificacion = mb_detect_encoding($nombre, "UTF-8", "ISO-8859-1" );
-                                        // $nombre = iconv($codificacion, 'ISO-8859-1', $nombre);
-                                    ?>
+                            ?>
                             <tr>
                                 <td>
                                     
@@ -62,6 +60,36 @@ include('includes/interfaz.php');
                                 </td>
                                 <td>
                                     <?php echo $dado['curso'] ?>
+                                </td>
+                                <td class="text-center">
+                                <?php 
+                                    $id = $dado['id'];
+                                    $sql2 = "SELECT situacion_actual FROM ficha_alumno WHERE id_alumno = $id order by id_ficha DESC LIMIT 1";
+                                    $resultado2 = mysqli_query($enlace, $sql2);
+                                    $dado2 = mysqli_fetch_array($resultado2);
+                                    $situacion = $dado2['situacion_actual'];
+                                ?>
+                                    
+                                    <?php 
+                                        
+                                        if($situacion === "Cerrado"){
+
+                                            echo '<span class="label label-success">'.$dado2['situacion_actual'].'</span>';
+
+                                        }elseif($situacion === "Seguimiento"){
+
+                                            echo '<span class="label label-info">'.$dado2['situacion_actual'].'</span>';
+
+                                        }elseif($situacion === "En proceso"){
+
+                                            echo '<span class="label label-warning">'.$dado2['situacion_actual'].'</span>';
+
+                                        }elseif($situacion === "Pendiente"){
+
+                                            echo '<span class="label label-primary">'.$dado2['situacion_actual'].'</span>';
+                                        }
+                                        
+                                    ?> 
                                 </td>
                                 <td>
                                     <a href="ver_ficha.php?id=<?php echo $dado['id'] ?>" type="submit" name="objetivo" class="btn btn-xs btn-primary">Ver fichas</i></a>                                    
@@ -123,7 +151,6 @@ include('includes/interfaz.php');
             "orderable": false,
             "targets": 0
         } ],
-        "order": [[ 1, 'asc' ]]
     } );
  
     t.on( 'order.dt search.dt', function () {
