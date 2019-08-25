@@ -5,10 +5,9 @@ include ("../mpdf/mpdf.php");
 
 $numFicha = mysqli_escape_string($enlace, $_GET['ficha_numero']);
 $id = mysqli_escape_string($enlace, $_GET['id_alumno']);
-$sql = "SELECT fa.id_alumno, fa.numFicha, fa.entrevistador, fa.entrevistado, fa.otro_entrevistador, fa.motivo, fa.acuerdos, fa.observaciones, fa.situacion_actual, fa.fecha_entrevista, hora_entrevista, a.nombres, a.apellidos FROM ficha_alumno fa INNER JOIN alumnos a ON fa.id_alumno = a.id WHERE id_alumno = '$id' AND numFicha= '$numFicha' ";
+$sql = "SELECT fa.id_alumno, fa.numFicha, fa.entrevistador, fa.entrevistado, fa.otro_entrevistador, fa.motivo, fa.acuerdos, fa.observaciones, fa.situacion_actual, date_format(fa.fecha_entrevista, '%d/%m/%Y') AS fecha_entrevista, hora_entrevista, a.nombres, a.apellidos FROM ficha_alumno fa INNER JOIN alumnos a ON fa.id_alumno = a.id WHERE id_alumno = '$id' AND numFicha= '$numFicha' ";
 $resultado = mysqli_query($enlace, $sql);
 $dado = mysqli_fetch_array($resultado);
-$fecha = date_create($row['fecha_entrevista']);
 
 $html='
 <style>
@@ -70,7 +69,7 @@ div{
 
 <div  class=" lista-estudiantes" ><strong>Nombre estudiante:</strong> '.$dado['nombres']." ".$dado['apellidos'].'</div>
 <div  class=" lista-estudiantes" ><strong>Entrevistador/es:</strong> '.$dado['entrevistador'].", ".$dado['otro_entrevistador'].'</div>
-<div  class=" lista-estudiantes" ><strong>Fecha Entrevista:</strong> '.date_format($fecha, 'd-m-Y').'</div>
+<div  class=" lista-estudiantes" ><strong>Fecha Entrevista:</strong> '.$dado['fecha_entrevista'].'</div>
 <div  class=" lista-estudiantes" ><strong>Situaci&#243;n actual:</strong> '.$dado['situacion_actual'].'</div>
 <br>
 <h4>1.- Mot&#237;vo por el cual se reliza entrevista</h4>
