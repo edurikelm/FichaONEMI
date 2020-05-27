@@ -2,6 +2,8 @@
 include ("../configs/conexion_db.php"); 
 include('includes/interfaz.php');
 
+$currentYear = date('Y');
+
 // Total de alumnos ingresados
 $query1 = "SELECT * FROM alumnos";
 $consulta1 = mysqli_query($enlace, $query1);
@@ -46,7 +48,29 @@ $num_filas8 = mysqli_num_rows($consulta8);
 $query9 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Inspectoria%'";
 $consulta9 = mysqli_query($enlace, $query9);
 $num_filas9 = mysqli_num_rows($consulta9);
+
+$query10 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='Cerrado'";
+$consulta10 = mysqli_query($enlace, $query10);
+$num_filas10 = mysqli_num_rows($consulta10);
+
+$query11 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='En proceso'";
+$consulta11 = mysqli_query($enlace, $query11);
+$num_filas11 = mysqli_num_rows($consulta11);
+
+$query12 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='Pendiente'";
+$consulta12 = mysqli_query($enlace, $query12);
+$num_filas12 = mysqli_num_rows($consulta12);
+
+$query13 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='Seguimiento'";
+$consulta13 = mysqli_query($enlace, $query13);
+$num_filas13 = mysqli_num_rows($consulta13);
+
+$query14 = "SELECT DISTINCT YEAR(fecha) fecha FROM ficha_alumno";
+$consulta14 = mysqli_query($enlace, $query14);
+
 ?>
+
+
 
 <div id="page-wrapper">
     <div class="row">
@@ -60,9 +84,19 @@ $num_filas9 = mysqli_num_rows($consulta9);
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-
+                    <select onchange="obtenerYear()" name="estadisticaAno" id="estadisticaAno" class="custom-select form-control">
+                        <option value="">--Historico--</option>
+                        <?php 
+                            
+                           while($dato = mysqli_fetch_array($consulta14)):
+                        ?>       
+                            <option value="<?php echo $dato['fecha']?>"><?php echo $dato['fecha']?></option>
+                        <?php 
+                           endwhile 
+                        ?> 
+                    </select>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="txtHint">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary text-center">
@@ -120,6 +154,40 @@ $num_filas9 = mysqli_num_rows($consulta9);
                                         <h3>Total:<?php echo $num_filas3 + $num_filas4 + $num_filas5 + $num_filas6 +$num_filas7 + $num_filas8 + $num_filas9?>
                                         </h3>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 flex-card-estado">
+                            <div class="panel panel-success text-center card-hijo">
+                                <div class="panel-heading ">
+                                    <h3>Cerradas</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="h1"><?php echo $num_filas10 ?></p>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning text-center card-hijo">
+                                <div class="panel-heading ">
+                                    <h3>En proceso</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="h1"><?php echo $num_filas11 ?></p>
+                                </div>
+                            </div>
+                            <div class="panel panel-danger text-center card-hijo">
+                                <div class="panel-heading ">
+                                    <h3>Pendientes</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="h1"><?php echo $num_filas12 ?></p>
+                                </div>
+                            </div>
+                            <div class="panel panel-info text-center card-hijo">
+                                <div class="panel-heading ">
+                                    <h3>Seguimiento</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="h1"><?php echo $num_filas13 ?></p>
                                 </div>
                             </div>
                         </div>

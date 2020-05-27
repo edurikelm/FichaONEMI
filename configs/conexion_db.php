@@ -10,6 +10,7 @@ if (mysqli_connect_errno()) {
     // printf("Falló la conexión: %s\n", mysqli_connect_error());
     exit();
 }
+// echo 'se conecto la wea';
 
 // printf("Conjunto de caracteres inicial: %s\n", mysqli_character_set_name($enlace));
 

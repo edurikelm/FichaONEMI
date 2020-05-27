@@ -3,7 +3,7 @@
 
 
 <script src="../js/agregar_eliminar.js" type="text/javascript"></script>
-<script src="../js/datos.js" type="text/javascript"></script>
+<script src="../js/estadisticas_ano.js"></script>
 
 
 <!-- Bootstrap Core JavaScript -->
@@ -19,6 +19,7 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
+
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>

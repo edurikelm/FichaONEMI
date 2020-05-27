@@ -29,7 +29,7 @@
       <input type="password" id="password" class="form-control" placeholder="Contraseña" name="password" required>
       <p style="color : red;" hidden>Usuario o password incorrectos!</p>
       <div><button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Iniciar Sesion</button></div>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+      <p class="mt-5 mb-3 text-muted">&copy; <?php echo date('Y') ?></p>
     </form>
   </body>
 </html>
