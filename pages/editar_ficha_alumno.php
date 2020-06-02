@@ -2,6 +2,8 @@
 include('includes/interfaz.php');
 include('../configs/conexion_db.php');
 
+$id_user = $_SESSION['id_user'];
+
 if(isset($_GET['ficha_numero'], $_GET['id_alumno'])): 
     $numFicha = mysqli_escape_string($enlace, $_GET['ficha_numero']);
     $id = mysqli_escape_string($enlace, $_GET['id_alumno']);
@@ -36,6 +38,8 @@ $numFicha = $_GET['ficha_numero'];
                     <form id="limpiar" name="form_ficha" role="form" method="POST"
                             action="../modulos/editar_ficha.php">
                             <div class="form-group">
+                                <input name="id_user" type="text" style="width: 80px" class="form-control hidden"
+                                    value=" <?php echo $id_user ?> ">
                                 <input name="numero" type="text" style="width: 80px" class="form-control hidden"
                                     value=" <?php print_r($id) ?> ">
                                 <input name="ficha_numero" type="text" style="width: 80px" class="form-control hidden"

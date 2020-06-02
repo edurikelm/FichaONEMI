@@ -1,0 +1,36 @@
+- Base de datos:
+	[X] Crear relacion entre tabla Users y Ficha, para identificar quien creo la ficha.(IMPORTANTE!!) 
+
+- Pagina Estadistica:
+	[X] Agregar cards con total de casos Cerrados, Pendientes, Seguimiento y En Proceso.
+	[X] Crear select y listar los años. 
+	[X] Mostrar, dependiendo del año seleccionado, los datos correspondientes a este en cada campo:
+		[X] Total de alumnos ingresados el año seleccionado.
+		[X] Total de entrevistas ingresadas el año seleccionado
+		[X] Total de entrevistas ingresadas por cada usuario en ese año + la suma de estas.
+		[X] Total de casos Cerrados, Pendientes, En Proceso, Seguimiento de ese año.
+	[X] Dejar por defecto estadisticas Historicas(totales de todo).
+	[X] Listar de manera dinamica totales ingresados por usuario (primero arreglar relaciones con usuarios de la BD).
+
+- Pagina agregar nueva ficha:
+	[X] Al crear una nueva ficha, agregar el usuario que la creo en la BD.
+	[X] Al actualizar ficha, agregar el usuario que la actualizo en la BD.
+
+- Pagina lista alumnos:
+	[X] Campo Situacion, mostrar correspondiente al año actual.
+
+- Pagina listar fichas:
+	[] Por defecto mostrar fichas del año actual en tabla principal.
+	[] Cards con detalle del año correspondiente.
+	[] Agregar select con los años.
+	[] Obtener dinamicamente, en otra tabla aparte, las fichas ingresadas en el año seleccionado.
+	[] Cards con detalle de los casos de ese año. 
+
+- Pagina agregar nuevos usuarios (solo lo verian los admins):
+	[] Crear CRUD de los usuarios existentes(Nombre, Username, Password, Privilegio(se puede modificar)).
+	[] Modificar formulario de ingreso de usuarios.
+	
+	 
+	
+
+	

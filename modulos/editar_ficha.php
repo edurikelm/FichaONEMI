@@ -18,6 +18,7 @@ if(isset($_POST["enviar"])){
     $numFicha = mysqli_escape_string($enlace, $_POST['ficha_numero']);
     $idAlumno = mysqli_escape_string($enlace, $_POST['numero']);
 	$bucle_ficha = mysqli_escape_string($enlace, $_POST['bucle_ficha']);
+	$id_user = mysqli_escape_string($enlace, $_POST['id_user']);
 	
 }
 
@@ -35,7 +36,7 @@ if(isset($_POST["enviar"])){
 		echo '<script language="javascript">alert("Error");</script>';
 	}
 
-    $sql = "UPDATE ficha_alumno SET entrevistador = '$entrevistadores', otro_entrevistador = '$otro_entrevistador', entrevistado = '$entrevistado', motivo = '$motivo', 
+    $sql = "UPDATE ficha_alumno SET id_user = '$id_user', entrevistador = '$entrevistadores', otro_entrevistador = '$otro_entrevistador', entrevistado = '$entrevistado', motivo = '$motivo', 
     acuerdos = '$acuerdos', observaciones = '$obs', situacion_actual = '$actual', fecha_entrevista = '$fecha_entrevista', hora_entrevista = '$hora_entrevista' WHERE numFicha = '$numFicha' AND id_alumno = '$idAlumno'";
 
 

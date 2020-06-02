@@ -63,8 +63,9 @@ include('includes/interfaz.php');
                                 </td>
                                 <td class="text-center">
                                 <?php 
+                                    $curren_year = date('Y');
                                     $id = $dado['id'];
-                                    $sql2 = "SELECT situacion_actual FROM ficha_alumno WHERE id_alumno = $id order by id_ficha DESC LIMIT 1";
+                                    $sql2 = "SELECT situacion_actual FROM ficha_alumno WHERE YEAR(fecha) = $curren_year AND id_alumno = $id order by id_ficha DESC LIMIT 1";
                                     $resultado2 = mysqli_query($enlace, $sql2);
                                     $dado2 = mysqli_fetch_array($resultado2);
                                     $situacion = $dado2['situacion_actual'];

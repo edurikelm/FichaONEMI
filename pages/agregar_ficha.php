@@ -2,6 +2,8 @@
 include('includes/interfaz.php');
 include('../configs/conexion_db.php');
 
+$id_user = $_SESSION['id_user'];
+
 if(isset($_GET['id'])): 
     $id = mysqli_escape_string($enlace, $_GET['id']);
     $sql = "SELECT * FROM alumnos WHERE id = '$id'";
@@ -41,6 +43,8 @@ $fichaNumero = $fichaNumero['numFicha'] + 1;
                         <form id="limpiar" name="form_ficha" role="form" method="POST"
                             action="../modulos/agregar_ficha.php">
                             <div class="form-group">
+                                <input name="id_user" type="text" style="width: 80px" class="form-control hidden"
+                                    value=" <?php echo $id_user ?> ">
                                 <input name="numero" type="text" style="width: 80px" class="form-control hidden"
                                     value=" <?php print_r($id) ?> ">
                                 <input name="ficha_numero" type="text" style="width: 80px" class="form-control hidden"

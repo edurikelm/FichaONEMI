@@ -14,40 +14,40 @@ $query2 = "SELECT * FROM ficha_alumno";
 $consulta2 = mysqli_query($enlace, $query2);
 $num_filas2 = mysqli_num_rows($consulta2);
 
-//Entrevistas por profesional, Cecilia
-$query3 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Cecilia%'";
-$consulta3 = mysqli_query($enlace, $query3);
-$num_filas3 = mysqli_num_rows($consulta3);
+// //Entrevistas por profesional, Cecilia
+// $query3 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Cecilia%'";
+// $consulta3 = mysqli_query($enlace, $query3);
+// $num_filas3 = mysqli_num_rows($consulta3);
 
-//Entrevistas por profesional, Maria Paz
-$query4 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Maria paz%'";
-$consulta4 = mysqli_query($enlace, $query4);
-$num_filas4 = mysqli_num_rows($consulta4);
+// //Entrevistas por profesional, Maria Paz
+// $query4 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Maria paz%'";
+// $consulta4 = mysqli_query($enlace, $query4);
+// $num_filas4 = mysqli_num_rows($consulta4);
 
-//Entrevistas por profesional, Gladys Mayorga
-$query5 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Gladys Mayorga%'";
-$consulta5 = mysqli_query($enlace, $query5);
-$num_filas5 = mysqli_num_rows($consulta5);
+// //Entrevistas por profesional, Gladys Mayorga
+// $query5 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Gladys Mayorga%'";
+// $consulta5 = mysqli_query($enlace, $query5);
+// $num_filas5 = mysqli_num_rows($consulta5);
 
-//Entrevistas por profesional, Marcela Varela
-$query6 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Marcela Varela%'";
-$consulta6 = mysqli_query($enlace, $query6);
-$num_filas6 = mysqli_num_rows($consulta6);
+// //Entrevistas por profesional, Marcela Varela
+// $query6 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Marcela Varela%'";
+// $consulta6 = mysqli_query($enlace, $query6);
+// $num_filas6 = mysqli_num_rows($consulta6);
 
-//Entrevistas por profesional, Victoria Miranda
-$query7 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Victoria Miranda%'";
-$consulta7 = mysqli_query($enlace, $query7);
-$num_filas7 = mysqli_num_rows($consulta7);
+// //Entrevistas por profesional, Victoria Miranda
+// $query7 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Victoria Miranda%'";
+// $consulta7 = mysqli_query($enlace, $query7);
+// $num_filas7 = mysqli_num_rows($consulta7);
 
-//Entrevistas por profesional, Elizabeth Vera
-$query8 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Elizabeth Vera%'";
-$consulta8 = mysqli_query($enlace, $query8);
-$num_filas8 = mysqli_num_rows($consulta8);
+// //Entrevistas por profesional, Elizabeth Vera
+// $query8 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Elizabeth Vera%'";
+// $consulta8 = mysqli_query($enlace, $query8);
+// $num_filas8 = mysqli_num_rows($consulta8);
 
-//Entrevistas por profesional, Inspectoria
-$query9 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Inspectoria%'";
-$consulta9 = mysqli_query($enlace, $query9);
-$num_filas9 = mysqli_num_rows($consulta9);
+// //Entrevistas por profesional, Inspectoria
+// $query9 = "SELECT * FROM ficha_alumno WHERE entrevistador LIKE '%Inspectoria%'";
+// $consulta9 = mysqli_query($enlace, $query9);
+// $num_filas9 = mysqli_num_rows($consulta9);
 
 $query10 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='Cerrado'";
 $consulta10 = mysqli_query($enlace, $query10);
@@ -65,8 +65,14 @@ $query13 = "SELECT situacion_actual FROM ficha_alumno WHERE situacion_actual='Se
 $consulta13 = mysqli_query($enlace, $query13);
 $num_filas13 = mysqli_num_rows($consulta13);
 
+//Años
 $query14 = "SELECT DISTINCT YEAR(fecha) fecha FROM ficha_alumno";
 $consulta14 = mysqli_query($enlace, $query14);
+
+$query15 = "SELECT nombre, id FROM users";
+$consulta15 = mysqli_query($enlace, $query15);
+
+
 
 ?>
 
@@ -97,6 +103,8 @@ $consulta14 = mysqli_query($enlace, $query14);
                     </select>
                 </div>
                 <div class="panel-body" id="txtHint">
+                    <h1 class="text-center">Historico</h1>
+                    <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary text-center">
@@ -128,30 +136,23 @@ $consulta14 = mysqli_query($enlace, $query14);
                                 </div>
                                 <div class="panel-body bg-info">
                                     <ul class="list-group">
+                                        <?php while($user = mysqli_fetch_array($consulta15)): ?>
                                         <li class="list-group-item">
-                                            Cecilia Castro <span class="badge"><?php echo $num_filas3 ?></span>
+                                            <?php echo $user['nombre'] ?> 
+                                            <span class="badge">
+                                                <?php 
+                                                    $id = $user['id'];
+                                                    $query16 = 'SELECT situacion_actual FROM ficha_alumno WHERE id_user = '.$id.'';
+                                                    $consulta16 = mysqli_query($enlace, $query16);
+                                                    $cantidad = mysqli_num_rows($consulta16);
+                                                    echo $cantidad;  
+                                                ?>
+                                            </span>
                                         </li>
-                                        <li class="list-group-item">
-                                            María Paz Sepúlveda <span class="badge"><?php echo $num_filas4 ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Gladys Mayorga <span class="badge"><?php echo $num_filas5 ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Marcela Varela <span class="badge"><?php echo $num_filas6 ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Victoria Miranda <span class="badge"><?php echo $num_filas7 ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Elizabeth Vera <span class="badge"><?php echo $num_filas8 ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Inspectoría <span class="badge"><?php echo $num_filas9 ?></span>
-                                        </li>
+                                        <?php endwhile; ?>           
                                     </ul>
                                     <div class="panel-footer text-center">
-                                        <h3>Total:<?php echo $num_filas3 + $num_filas4 + $num_filas5 + $num_filas6 +$num_filas7 + $num_filas8 + $num_filas9?>
+                                        <h3>Total:<?php echo $num_filas2?>
                                         </h3>
                                     </div>
                                 </div>

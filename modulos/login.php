@@ -12,17 +12,20 @@ if(isset($_POST["submit"])){
 	$sql_sel = "SELECT * FROM users WHERE username='".$usuario."' and password= '".$password."'"; 
 	// SE EJECUTA LA CONSULTA Y SE GUARDA EN UNA VARIABLE EL RESULTADO
 	$respuesta= mysqli_query($enlace,$sql_sel);
-    $dado = mysqli_fetch_array($respuesta);
-
+	$dado = mysqli_fetch_array($respuesta);
+	
 	//CUENTA EL NUMERO DE FILAS QUE RETORNO LA CONSULTA
 	$num = mysqli_num_rows($respuesta);
 	
 	if(($password == $dado['password']) && ($usuario == $dado['username'])){
 		if($num > 0){
 			//SE CREA LA SESION CON LA ID DEL USUARIO
-			$row=mysqli_fetch_array($respuesta);
+			// $row=mysqli_fetch_array($respuesta);
+			$_SESSION['id_user'] = $dado['id'];
+			$_SESSION['user_nombre'] = $dado['nombre'];
 			$_SESSION['s_id'] = $usuario;
 			$_SESSION['tipo'] = $dado['privilegio'];
+			
 			//SE REDIRECCIONA AL SISTEMA
 			header("Location:../pages/index.php");
 			echo "login correcto";

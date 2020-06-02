@@ -3,6 +3,7 @@ require ('../configs/conexion_db.php');
 if(isset($_POST["enviar"])){
 
 	// $entrevistador = mysqli_escape_string($enlace, $_POST['nombre1']).', '.mysqli_escape_string($enlace, $_POST['nombre2']).', '.mysqli_escape_string($enlace, $_POST['nombre3']).', '.mysqli_escape_string($enlace, $_POST['nombre4']).', '.mysqli_escape_string($enlace, $_POST['nombre5']);
+
 	$entrevistador1 = mysqli_escape_string($enlace, $_POST['nombre1']);
 	$entrevistador2 = mysqli_escape_string($enlace, $_POST['nombre2']);
 	$entrevistador3 = mysqli_escape_string($enlace, $_POST['nombre3']);
@@ -17,6 +18,7 @@ if(isset($_POST["enviar"])){
 	$fecha_entrevista = mysqli_escape_string($enlace, $_POST['fecha_entrevista']);	
 	$hora_entrevista = mysqli_escape_string($enlace, $_POST['hora_entrevista']);	
 
+	$id_user = mysqli_escape_string($enlace, $_POST['id_user']);
     $numFicha = mysqli_escape_string($enlace, $_POST['ficha_numero']);
     $idAlumno = mysqli_escape_string($enlace, $_POST['numero']);
     $bucle_ficha = mysqli_escape_string($enlace, $_POST['bucle_ficha']);
@@ -68,7 +70,7 @@ if(isset($_POST["enviar"])){
 	// echo $bucle_ficha;
 	// echo $entrevistador;
 
-	$sql = ("INSERT INTO ficha_alumno (id_alumno,numFicha,entrevistador,otro_entrevistador,entrevistado,motivo,acuerdos,observaciones,situacion_actual,fecha_entrevista,hora_entrevista) VALUES('".$idAlumno."','".$numFicha."','".$entrevistadores."','".$otro_entrevistador."','".$entrevistado."','".$motivo."','".$acuerdos."','".$obs."','".$actual."','".$fecha_entrevista."','".$hora_entrevista."')");
+	$sql = ("INSERT INTO ficha_alumno (id_user,id_alumno,numFicha,entrevistador,otro_entrevistador,entrevistado,motivo,acuerdos,observaciones,situacion_actual,fecha_entrevista,hora_entrevista) VALUES('".$id_user."','".$idAlumno."','".$numFicha."','".$entrevistadores."','".$otro_entrevistador."','".$entrevistado."','".$motivo."','".$acuerdos."','".$obs."','".$actual."','".$fecha_entrevista."','".$hora_entrevista."')");
 
 	if(mysqli_query($enlace, $sql)){
 		header('Location: ../pages/ver_ficha.php?id='.$idAlumno); 

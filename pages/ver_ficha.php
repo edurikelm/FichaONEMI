@@ -5,6 +5,7 @@
 include('includes/interfaz.php');
 
 $id_alumno = $_GET['id'];
+$current_year = date('Y');
 
 if(isset($_GET['id'])): 
     $id = mysqli_escape_string($enlace, $_GET['id']);
@@ -17,6 +18,10 @@ endif;
 $query2 = "SELECT id_ficha, id_alumno FROM ficha_alumno WHERE id_alumno = $id_alumno";
 $consulta2 = mysqli_query($enlace, $query2);
 $num_filas2 = mysqli_num_rows($consulta2);
+
+//Años
+$query14 = "SELECT DISTINCT YEAR(fecha) fecha FROM ficha_alumno";
+$consulta14 = mysqli_query($enlace, $query14);
 
 
 ?>
@@ -37,12 +42,20 @@ $num_filas2 = mysqli_num_rows($consulta2);
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                <form class="form-inline">
 
                     <?php if($_SESSION['tipo']==1 || $_SESSION['tipo']==0) { ?>
                     <a href="agregar_ficha.php?id=<?php echo $dado['id'] ?>" class="btn btn-sm btn-success">Nueva
                         entrevista</a>
-
                     <?php } ?>
+                
+                    <select class="form-control" name="" id="">
+                        <option value="">Hola</option>
+                    <?php while($dato = mysqli_fetch_array($consulta14)): ?>
+                        <option value=""><?php echo $dato['fecha'] ?></option>
+                    <?php endwhile; ?>
+                    </select>
+                </form>
 
                 </div>
                 <div class="panel-body">
@@ -68,7 +81,7 @@ $num_filas2 = mysqli_num_rows($consulta2);
 
                         <tbody>
                             <?php 
-                                    $sql = "SELECT id_ficha, numFicha, id_alumno, date_format(fecha_entrevista, '%d/%m/%Y') AS fecha_entrevista, hora_entrevista, entrevistador,otro_entrevistador,entrevistado, motivo, situacion_actual, acuerdos, observaciones FROM ficha_alumno WHERE id_alumno = $id" ;
+                                    $sql = "SELECT id_ficha, numFicha, id_alumno, fecha, date_format(fecha_entrevista, '%d/%m/%Y') AS fecha_entrevista, hora_entrevista, entrevistador,otro_entrevistador,entrevistado, motivo, situacion_actual, acuerdos, observaciones FROM ficha_alumno WHERE YEAR(fecha) = $current_year AND id_alumno = $id" ;
                                     $resultado = mysqli_query($enlace, $sql);
                                     while ($dado = mysqli_fetch_array($resultado)):
                                     ?>
