@@ -80,7 +80,7 @@ include('includes/interfaz.php');
                                         }elseif($situacion === "Seguimiento"){
 
                                             echo '<span class="label label-info">'.$dado2['situacion_actual'].'</span>';
-
+ 
                                         }elseif($situacion === "En proceso"){
 
                                             echo '<span class="label label-warning">'.$dado2['situacion_actual'].'</span>';
@@ -88,6 +88,8 @@ include('includes/interfaz.php');
                                         }elseif($situacion === "Pendiente"){
 
                                             echo '<span class="label label-primary">'.$dado2['situacion_actual'].'</span>';
+                                        }else{
+                                            echo '<span class="label label-default">Sin situacion</span>';
                                         }
                                         
                                     ?> 

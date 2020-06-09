@@ -4,6 +4,8 @@
 
 <script src="../js/agregar_eliminar.js" type="text/javascript"></script>
 <script src="../js/estadisticas_ano.js"></script>
+<script src="../js/lista_fichas_ano.js"></script>
+<script src="../js/total_por_year.js"></script>
 
 
 <!-- Bootstrap Core JavaScript -->

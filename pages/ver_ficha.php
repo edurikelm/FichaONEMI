@@ -19,52 +19,71 @@ $query2 = "SELECT id_ficha, id_alumno FROM ficha_alumno WHERE id_alumno = $id_al
 $consulta2 = mysqli_query($enlace, $query2);
 $num_filas2 = mysqli_num_rows($consulta2);
 
+// Total entrevistas por alumno en current año
+$query3 = "SELECT id_ficha, id_alumno FROM ficha_alumno WHERE YEAR(FECHA) = $current_year AND id_alumno = $id_alumno";
+$consulta3 = mysqli_query($enlace, $query3);
+$num_filas3 = mysqli_num_rows($consulta3);
+
 //Años
-$query14 = "SELECT DISTINCT YEAR(fecha) fecha FROM ficha_alumno";
+$query14 = "SELECT DISTINCT YEAR(fecha) fecha FROM ficha_alumno WHERE YEAR(FECHA) != $current_year";
 $consulta14 = mysqli_query($enlace, $query14);
 
 
 ?>
 
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
+    <div class="flecha-year">
+        <div>
             <a href="../pages/lista_alumno.php"><i class="atras fas fa-arrow-left"></i></a>
+        </div>
+        <div>
+            <p>Cambiar Año:</p>
+            <select onchange="obtenerYearFicha()" class="form-control" name="" id="yearFicha">
+                <option value="<?php echo $current_year ?>"><?php echo $current_year ?></option>
+            <?php while($dato = mysqli_fetch_array($consulta14)): ?>
+                <option value="<?php echo $dato['fecha'] ?>"><?php echo $dato['fecha'] ?></option>
+            <?php endwhile; ?>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
             <h1 class="page-header">Fichas de <strong>
                     <?php echo $dado['nombres']?>
                     <?php echo $dado['apellidos']?></strong>
             </h1>
-            <h3>Total Entrevistas: <?php echo $num_filas2?></h3>
+            <h3>Total Entrevistas: <strong><?php echo $num_filas2?></strong></h3>
         </div>
         <!-- /.col-lg-12 -->
     </div>
+    <div class="row">
+        <div class="col-md-12 text-center" id="total_year">
+            <h4>Total año <strong><?php echo $current_year ?></strong>: <strong><?php echo $num_filas3 ?></strong></h4>    
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 <form class="form-inline">
-
+                    <input type="text" value="<?php echo $id_alumno ?>" id="idAlumno" hidden>
                     <?php if($_SESSION['tipo']==1 || $_SESSION['tipo']==0) { ?>
                     <a href="agregar_ficha.php?id=<?php echo $dado['id'] ?>" class="btn btn-sm btn-success">Nueva
                         entrevista</a>
                     <?php } ?>
                 
-                    <select class="form-control" name="" id="">
-                        <option value="">Hola</option>
-                    <?php while($dato = mysqli_fetch_array($consulta14)): ?>
-                        <option value=""><?php echo $dato['fecha'] ?></option>
-                    <?php endwhile; ?>
-                    </select>
+                    
                 </form>
 
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="txtHint2">
                     <table width="100%" class="table table-bordered" id="example">
                         <thead>
                             <tr>
                                 <th scope="col">N°</th>
                                 <th scope="col" hidden>idalumno</th>
-                                <th scope="col">Fecha</th>
+                                <th scope="col">Fecha Entrevista</th>
                                 <th scope="col">Situacion Actual</th>
                                 <th scope="col">Entrevistador/es</th>
                                 <th scope="col">Entrevistado/a</th>
