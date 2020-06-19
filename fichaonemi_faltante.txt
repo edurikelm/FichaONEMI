@@ -20,15 +20,14 @@
 	[X] Campo Situacion, mostrar correspondiente al año actual.
 
 - Pagina listar fichas:
-	[] Por defecto mostrar fichas del año actual en tabla principal.
-	[] Cards con detalle del año correspondiente.
-	[] Agregar select con los años.
-	[] Obtener dinamicamente, en otra tabla aparte, las fichas ingresadas en el año seleccionado.
-	[] Cards con detalle de los casos de ese año. 
+	[X] Por defecto mostrar fichas del año actual en tabla principal.
+	[X] Cards con detalle del año correspondiente.
+	[X] Agregar select con los años.
+	[X] Obtener dinamicamente las fichas ingresadas en el año seleccionado.
 
 - Pagina agregar nuevos usuarios (solo lo verian los admins):
-	[] Crear CRUD de los usuarios existentes(Nombre, Username, Password, Privilegio(se puede modificar)).
-	[] Modificar formulario de ingreso de usuarios.
+	[X] Crear CRUD de los usuarios existentes(Nombre, Username, Password, Privilegio(se puede modificar)).
+	[X] Modificar formulario de ingreso de usuarios.
 	
 	 
 	

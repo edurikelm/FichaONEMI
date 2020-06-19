@@ -118,7 +118,12 @@ header('Location:../login.php');
                         <?php if($_SESSION['tipo']==1) { ?>
 
                         <li>
-                            <a href="agregar_usuario.php"><i class="fa fa-user fa-fw"></i> Agregar Usuario</a>
+                            <a href="#"><i class="fas fa-user fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="lista_usuarios.php"> Listado</a>
+                                </li>
+                            </ul>
                         </li>
                         <?php } ?>
                         <?php if($_SESSION['tipo']==1) { ?>

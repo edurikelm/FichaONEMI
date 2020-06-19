@@ -1,26 +1,39 @@
 <?php
 require '../configs/conexion_db.php';
 
-if(isset($_POST["submit"])){
+if(isset($_POST["agregar_user"])){
 
-	$usuario = $_POST["usuario"];
-    $password =$_POST["password"];
-    $password2 =$_POST["password2"];
-    $admin =$_POST["chk_admin"];
+	$nombre = $_POST["nombre"];
+	$username = $_POST["username"];
+  $password =$_POST["password"];
+  // $password2 =$_POST["password2"];
+  $admin =$_POST["chk_admin"];
+
+  if ($admin) {
+    $check = 1;
+  }else{
+    $check = 0;
+  }
+
+  
 	
     }
+    // echo $nombre;
+    // echo $username;
+    // echo $password;
+    echo $check;
+
+    $sql="INSERT INTO users (nombre, username, password, privilegio) VALUES('".$nombre."','".$username."','".$password."','".$check."')";
     
-    $sql="INSERT INTO users (name,password,privilegio) VALUES('".$usuario."','".$password."','".$admin."')";
-    
-    if($password == $password2){
-      if(mysqli_query($enlace, $sql)){
-        header('Location: ../login.php'); 
-        echo 'correcto =)';
-        echo $sql;
-      }
-      else{
-        header('Location: ../pages/pantalla_error_usuario.php'); 
-      }
+  
+    if(mysqli_query($enlace, $sql)){
+      header('Location: ../pages/lista_usuarios.php?successo'); 
+      // echo 'correcto =)';
+      // echo $sql;
     }
+    else{
+      header('Location: ../pages/lista_usuarios.php?error');
+    }
+
 	
 	
